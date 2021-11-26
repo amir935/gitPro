@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="file" format="csv">
+      <types:shape format="weave" example="examples/SubCityUserData-1.csv"><![CDATA[%dw 2.0
+
+type file = Array<{|  first_name: String,   last_name: String,   phone: String,   ssn: String,   worda: String|}> {"isQuotedString": "false",
+"header": "true",
+"headerLineNumber": "0",
+"separator": ","}
+
+]]></types:shape>
+      <types:properties>
+        <types:property name="headerLineNumber" value="0"/>
+        <types:property name="header" value="true"/>
+        <types:property name="isQuotedString" value="false"/>
+        <types:property name="separator" value=","/>
+      </types:properties>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#e07a57ec-42d0-4a22-8344-55506727c8fc">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="file"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#cd60a6ad-e767-41c3-8f37-29b04d4bdbd8">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="file"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
